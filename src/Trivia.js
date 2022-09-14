@@ -9,9 +9,9 @@ const Trivia = () => {
     }, [])
     console.log(categories)
     return (
-        <ul>
-            {categories.map(elem => <li key={elem.id}>{elem.name}</li>)}
-        </ul>
+        <div className='btn-group-vertical'>
+            {categories.map(elem => <button className='btn btn-primary' key={elem.id}>{elem.name}</button>)}
+        </div>
     )
 }
 
