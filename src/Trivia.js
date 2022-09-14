@@ -9,8 +9,8 @@ const Trivia = () => {
     }, [])
     console.log(categories)
     return (
-        <div className='btn-group-vertical'>
-            {categories.map(elem => <button className='btn btn-primary' key={elem.id}>{elem.name}</button>)}
+        <div className='btn-group-vertical btn-group-toggle'>
+            {categories.map(elem => <><input className='btn-check' type='radio' name='options' id={elem.name} autoComplete='off' /><label className='btn btn-primary' for={elem.name} key={elem.id}>{elem.name}</label></>)}
         </div>
     )
 }
