@@ -13,11 +13,21 @@ const TriviaQuestion = ({question, setCorrect}) => {
         <article>
             <div>{htmlDecode(question.question)}</div>
             <div className='btn-group'>{answers.map(answer => (
-                <button
-                    className='btn btn-primary'
-                    key={answer}
-                    onClick={() => setCorrect(answer === question.correct_answer)}
-                >{htmlDecode(answer)}</button>
+                <>
+                    <input
+                        className='btn-check'
+                        type='radio'
+                        name={`${question.question}-options`}
+                        id={`${question.question}${answer}`}
+                        autoComplete='off'
+                    />
+                    <label
+                        className='btn btn-primary'
+                        for={`${question.question}${answer}`}
+                        key={answer}
+                        onClick={() => setCorrect(answer === question.correct_answer)}
+                    >{htmlDecode(answer)}</label>
+                </>
             ))}</div>
         </article>
     )
