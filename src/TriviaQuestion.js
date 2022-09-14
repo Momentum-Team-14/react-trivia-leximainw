@@ -25,7 +25,7 @@ const TriviaQuestion = ({question, setCorrect}) => {
                         className='btn btn-primary'
                         for={`${question.question}${answer}`}
                         key={answer}
-                        onClick={() => setCorrect(answer === question.correct_answer)}
+                        onClick={() => setCorrect([answer === question.correct_answer, answer])}
                     >{htmlDecode(answer)}</label>
                 </>
             ))}</div>

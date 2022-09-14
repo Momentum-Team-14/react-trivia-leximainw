@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import TriviaQuestion from './TriviaQuestion';
+import QuestionResult from './QuestionResult';
 
 const SELECTING_CATEGORY = 0;
 const TAKING_QUIZ = 1;
+const QUIZ_RESULTS = 2;
 
 const Trivia = () => {
     const [categories, setCategories] = useState([])
@@ -64,7 +66,19 @@ const Trivia = () => {
                         }}
                         key={elem.question}
                     />
-                ))}</div>
+                ))}
+                <button
+                    className='btn btn-success'
+                    style={{marginTop: '1rem'}}
+                    onClick={() => setQuizState(QUIZ_RESULTS)}
+                >Complete Quiz</button></div>
+            )
+        case QUIZ_RESULTS:
+            const numAnswered = answered.reduce((accum, el) => accum += el != null, 0)
+            const numCorrect = answered.reduce((accum, el) => accum += el ? el[0] : 0, 0)
+            return (
+                <div><div>You answered {numAnswered}/10 questions and got {numCorrect}/{numAnswered} right!</div>
+                {questions.map((question, index) => <QuestionResult question={question} answer={answered[index] ? answered[index][1] : null} />)}</div>
             )
         default:
             return (
