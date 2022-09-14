@@ -10,6 +10,7 @@ const Trivia = () => {
     const [quizState, setQuizState] = useState(0)
     const [currCategory, setCurrCategory] = useState(null)
     const [questions, setQuestions] = useState([])
+    const [answered, setAnswered] = useState([])
     useEffect(() => {
         axios.get('https://opentdb.com/api_category.php')
             .then(res => setCategories(res.data.trivia_categories))
@@ -17,10 +18,12 @@ const Trivia = () => {
     useEffect(() => {
         if (quizState === TAKING_QUIZ) {
             axios.get(`https://opentdb.com/api.php?amount=10&category=${currCategory.id}`)
-                .then(res => setQuestions(res.data.results))
+                .then(res => {
+                    setQuestions(res.data.results)
+                    setAnswered(Array(res.data.results.length).fill(null))
+                })
         }
     }, [currCategory])
-    console.log(categories)
 
     switch (quizState) {
         case SELECTING_CATEGORY:
@@ -50,7 +53,18 @@ const Trivia = () => {
             )
         case TAKING_QUIZ:
             return (
-                <div>{questions.map(elem => <TriviaQuestion question={elem} key={elem.question}/>)}</div>
+                <div>{questions.map((elem, index) => (
+                    <TriviaQuestion
+                        question={elem}
+                        setCorrect={correct => {
+                            let newAnswered = [...answered]
+                            newAnswered[index] = correct
+                            console.log(newAnswered)
+                            setAnswered(newAnswered)
+                        }}
+                        key={elem.question}
+                    />
+                ))}</div>
             )
         default:
             return (
