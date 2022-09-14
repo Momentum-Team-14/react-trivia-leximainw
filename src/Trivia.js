@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import htmlDecode from './utils'
+import TriviaQuestion from './TriviaQuestion';
 
 const SELECTING_CATEGORY = 0;
 const TAKING_QUIZ = 1;
@@ -50,21 +50,7 @@ const Trivia = () => {
             )
         case TAKING_QUIZ:
             return (
-                <div>
-                    {questions.map(elem => {
-                        console.log(elem)
-                        const allAnswers = [...elem.incorrect_answers]
-                        allAnswers.push(elem.correct_answer)
-                        return (
-                            <article key={elem.question}>
-                                {htmlDecode(elem.question)}
-                                <div>{allAnswers.map(elem => (
-                                    <button className='btn btn-primary' key={elem}>{elem}</button>
-                                ))}</div>
-                            </article>
-                        )
-                    })}
-                </div>
+                <div>{questions.map(elem => <TriviaQuestion question={elem} key={elem.question}/>)}</div>
             )
         default:
             return (
