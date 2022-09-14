@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import TriviaQuestion from './TriviaQuestion';
-import QuestionResult from './QuestionResult';
+import QuestionResults from './QuestionResults';
+import QuizQuestions from './QuizQuestions';
 
 const SELECTING_CATEGORY = 0;
 const TAKING_QUIZ = 1;
@@ -12,7 +12,7 @@ const Trivia = () => {
     const [quizState, setQuizState] = useState(0)
     const [currCategory, setCurrCategory] = useState(null)
     const [questions, setQuestions] = useState([])
-    const [answered, setAnswered] = useState([])
+    const [answers, setAnswers] = useState([])
     useEffect(() => {
         axios.get('https://opentdb.com/api_category.php')
             .then(res => setCategories(res.data.trivia_categories))
@@ -22,7 +22,6 @@ const Trivia = () => {
             axios.get(`https://opentdb.com/api.php?amount=10&category=${currCategory.id}`)
                 .then(res => {
                     setQuestions(res.data.results)
-                    setAnswered(Array(res.data.results.length).fill(null))
                 })
         }
     }, [currCategory])
@@ -42,8 +41,7 @@ const Trivia = () => {
                             />
                             <label
                                 className='btn btn-primary'
-                                for={elem.name}
-                                key={elem.id}
+                                htmlFor={elem.name}
                                 onClick={() => {
                                     setCurrCategory(elem)
                                     setQuizState(TAKING_QUIZ)
@@ -55,35 +53,18 @@ const Trivia = () => {
             )
         case TAKING_QUIZ:
             return (
-                <div>{questions.map((elem, index) => (
-                    <TriviaQuestion
-                        question={elem}
-                        setCorrect={correct => {
-                            let newAnswered = [...answered]
-                            newAnswered[index] = correct
-                            console.log(newAnswered)
-                            setAnswered(newAnswered)
-                        }}
-                        key={elem.question}
-                    />
-                ))}
-                <button
-                    className='btn btn-success'
-                    style={{marginTop: '1rem'}}
-                    onClick={() => setQuizState(QUIZ_RESULTS)}
-                >Complete Quiz</button></div>
+                <QuizQuestions
+                    questions={questions}
+                    onComplete={answers => {
+                        setAnswers(answers)
+                        setQuizState(QUIZ_RESULTS)
+                    }}
+                />
             )
         case QUIZ_RESULTS:
-            const numAnswered = answered.reduce((accum, el) => accum += el != null, 0)
-            const numCorrect = answered.reduce((accum, el) => accum += el ? el[0] : 0, 0)
-            return (
-                <div><div>You answered {numAnswered}/10 questions and got {numCorrect}/{numAnswered} right!</div>
-                {questions.map((question, index) => <QuestionResult question={question} answer={answered[index] ? answered[index][1] : null} />)}</div>
-            )
+            return <QuestionResults answers={answers} questions={questions} />
         default:
-            return (
-                <div>Unexpected quiz state {quizState}</div>
-            )
+            return <div>Unexpected quiz state {quizState}</div>
     }
 }
 
