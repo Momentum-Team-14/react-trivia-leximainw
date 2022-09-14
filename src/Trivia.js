@@ -19,7 +19,7 @@ const Trivia = () => {
             .then(res => setCategories(res.data.trivia_categories))
     }, [])
     useEffect(() => {
-        if (quizState === TAKING_QUIZ) {
+        if (currCategory) {
             axios.get(`https://opentdb.com/api.php?amount=10&category=${currCategory.id}`)
                 .then(res => {
                     setQuestions(res.data.results)
