@@ -10,13 +10,7 @@ const Trivia = () => {
     console.log(categories)
     return (
         <ul>
-            {categories.map((elem, index) => (
-                <li
-                    key={elem.id}
-                >
-                    {elem.name}
-                </li>
-            ))}
+            {categories.map(elem => <li key={elem.id}>{elem.name}</li>)}
         </ul>
     )
 }
