@@ -27,31 +27,43 @@ const Trivia = () => {
         }
     }, [currCategory])
 
+    const categoryList = <CategoryList
+        categories={categories}
+        onSelected={category => {
+            setCurrCategory(category)
+            setQuizState(TAKING_QUIZ)
+        }}
+    />
+
     switch (quizState) {
         case SELECTING_CATEGORY:
-            return (
-                <CategoryList
-                    categories={categories}
-                    onSelected={category => {
-                        setCurrCategory(category)
-                        setQuizState(TAKING_QUIZ)
-                    }}
-                />
-            )
+            return categoryList
         case TAKING_QUIZ:
             return (
-                <QuizQuestions
-                    questions={questions}
-                    onComplete={answers => {
-                        setAnswers(answers)
-                        setQuizState(QUIZ_RESULTS)
-                    }}
-                />
+                <div style={{display: 'flex'}}>
+                    {categoryList}
+                    <QuizQuestions
+                        questions={questions}
+                        onComplete={answers => {
+                            setAnswers(answers)
+                            setQuizState(QUIZ_RESULTS)
+                        }}
+                    />
+                </div>
             )
         case QUIZ_RESULTS:
-            return <QuestionResults answers={answers} questions={questions} />
+            return (
+                <div style={{display: 'flex'}}>
+                    {categoryList}
+                    <QuestionResults answers={answers} questions={questions} />
+                </div>
+            )
         default:
-            return <div>Unexpected quiz state {quizState}</div>
+            return (
+                <div style={{display: 'flex'}}>
+                    <div>Unexpected quiz state {quizState}</div>
+                </div>
+            )
     }
 }
 

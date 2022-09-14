@@ -1,6 +1,6 @@
 const CategoryList = ({categories, onSelected}) => {
     return (
-        <div className='btn-group-vertical btn-group-toggle'>
+        <div className='btn-group-vertical btn-group-toggle' style={{flexShrink: 0, marginRight: '2rem'}}>
             {categories.map(category => (
                 <>
                     <input
