@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import QuestionResults from './QuestionResults';
 import QuizQuestions from './QuizQuestions';
+import CategoryList from './CategoryList';
 
 const SELECTING_CATEGORY = 0;
 const TAKING_QUIZ = 1;
@@ -29,27 +30,13 @@ const Trivia = () => {
     switch (quizState) {
         case SELECTING_CATEGORY:
             return (
-                <div className='btn-group-vertical btn-group-toggle'>
-                    {categories.map(elem => (
-                        <>
-                            <input
-                                className='btn-check'
-                                type='radio'
-                                name='options'
-                                id={elem.name}
-                                autoComplete='off'
-                            />
-                            <label
-                                className='btn btn-primary'
-                                htmlFor={elem.name}
-                                onClick={() => {
-                                    setCurrCategory(elem)
-                                    setQuizState(TAKING_QUIZ)
-                                }}
-                            >{elem.name}</label>
-                        </>
-                    ))}
-                </div>
+                <CategoryList
+                    categories={categories}
+                    onSelected={category => {
+                        setCurrCategory(category)
+                        setQuizState(TAKING_QUIZ)
+                    }}
+                />
             )
         case TAKING_QUIZ:
             return (
