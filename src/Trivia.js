@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import QuestionResults from './QuestionResults'
-import QuizQuestions from './QuizQuestions'
+import TriviaQuestions from './TriviaQuestions'
 import CategoryList from './CategoryList'
 
 const SELECTING_CATEGORY = 0
@@ -62,7 +62,7 @@ const Trivia = () => {
                 return (
                     <div style={{display: 'flex'}}>
                         {categoryList}
-                        <QuizQuestions
+                        <TriviaQuestions
                             questions={questions}
                             onComplete={answers => {
                                 setAnswers(answers)

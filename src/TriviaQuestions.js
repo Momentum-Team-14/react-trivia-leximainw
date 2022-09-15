@@ -1,7 +1,7 @@
 import { useState } from "react"
 import TriviaQuestion from "./TriviaQuestion"
 
-const QuizQuestions = ({questions, onComplete}) => {
+const TriviaQuestions = ({questions, onComplete}) => {
     const [answered, setAnswered] = useState(Array(questions.length).fill(null))
 
     return (
@@ -24,4 +24,4 @@ const QuizQuestions = ({questions, onComplete}) => {
     )
 }
 
-export default QuizQuestions
+export default TriviaQuestions
