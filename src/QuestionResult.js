@@ -7,7 +7,7 @@ const QuestionResult = ({question, answer}) => {
             {answer === null ?
                 <div className="btn-group">
                     <div className="btn btn-success">The correct answer was {htmlDecode(question.correct_answer)}.</div>
-                    <div className="btn btn-danger">You chose not to answer.</div>
+                    <div className="btn btn-warning">You chose not to answer.</div>
                 </div> : answer !== question.correct_answer ?
                 <div className="btn-group">
                     <div className="btn btn-success">The correct answer was {htmlDecode(question.correct_answer)}.</div>
