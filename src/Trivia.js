@@ -18,7 +18,10 @@ const Trivia = () => {
 
     useEffect(() => {
         axios.get('https://opentdb.com/api_category.php')
-            .then(res => setCategories(res.data.trivia_categories))
+            .then(res => setCategories(
+                res.data.trivia_categories.sort(
+                    (a, b) => a.name.localeCompare(b.name)
+            )))
     }, [])
     useEffect(() => {
         if (currCategory) {
