@@ -9,7 +9,6 @@ const TAKING_QUIZ = 1
 const QUIZ_RESULTS = 2
 
 const Trivia = () => {
-    const [categories, setCategories] = useState([])
     const [quizState, setQuizState] = useState(0)
     const [currCategory, setCurrCategory] = useState(null)
     const [categoryUpdateFlag, setCatUpFlag] = useState(false)
@@ -17,13 +16,6 @@ const Trivia = () => {
     const [answers, setAnswers] = useState([])
     const [apiToken, setApiToken] = useState(null)
 
-    useEffect(() => {
-        axios.get('https://opentdb.com/api_category.php')
-            .then(res => setCategories(
-                res.data.trivia_categories.sort(
-                    (a, b) => a.name.localeCompare(b.name)
-            )))
-    }, [])
     useEffect(() => {
         axios.get('https://opentdb.com/api_token.php?command=request')
             .then(res => setApiToken(res.data.token))
@@ -38,7 +30,6 @@ const Trivia = () => {
     }, [currCategory, categoryUpdateFlag, apiToken])
 
     const categoryList = <CategoryList
-        categories={categories}
         onSelected={category => {
             setQuestions(null)
             setCurrCategory(category)
