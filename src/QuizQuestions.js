@@ -3,6 +3,7 @@ import TriviaQuestion from "./TriviaQuestion"
 
 const QuizQuestions = ({questions, onComplete}) => {
     const [answered, setAnswered] = useState(Array(questions.length).fill(null))
+
     return (
         <div>{questions.map((elem, index) => (
             <TriviaQuestion

@@ -9,6 +9,7 @@ const TriviaQuestion = ({question, setCorrect}) => {
         allAnswers = shuffleArray(allAnswers)
         setAnswers(allAnswers)
     }
+
     return (
         <article>
             <div>{htmlDecode(question.question)}</div>

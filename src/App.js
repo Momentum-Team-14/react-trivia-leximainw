@@ -1,10 +1,6 @@
 import './App.css';
 import Trivia from './Trivia';
 
-function App() {
-    return (
-        <Trivia />
-    );
-}
+const App = () => <Trivia />;
 
 export default App;
