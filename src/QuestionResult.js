@@ -1,4 +1,4 @@
-import { htmlDecode } from "./utils";
+import { htmlDecode } from "./utils"
 
 const QuestionResult = ({question, answer}) => {
     return (
@@ -21,4 +21,4 @@ const QuestionResult = ({question, answer}) => {
     )
 }
 
-export default QuestionResult;
+export default QuestionResult

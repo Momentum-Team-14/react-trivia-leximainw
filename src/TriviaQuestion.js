@@ -34,4 +34,4 @@ const TriviaQuestion = ({question, setCorrect}) => {
     )
 }
 
-export default TriviaQuestion;
+export default TriviaQuestion

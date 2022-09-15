@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import QuestionResults from './QuestionResults';
-import QuizQuestions from './QuizQuestions';
-import CategoryList from './CategoryList';
+import QuestionResults from './QuestionResults'
+import QuizQuestions from './QuizQuestions'
+import CategoryList from './CategoryList'
 
-const SELECTING_CATEGORY = 0;
-const TAKING_QUIZ = 1;
-const QUIZ_RESULTS = 2;
+const SELECTING_CATEGORY = 0
+const TAKING_QUIZ = 1
+const QUIZ_RESULTS = 2
 
 const Trivia = () => {
     const [categories, setCategories] = useState([])
@@ -70,4 +70,4 @@ const Trivia = () => {
     }
 }
 
-export default Trivia;
+export default Trivia

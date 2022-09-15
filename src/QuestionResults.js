@@ -1,4 +1,4 @@
-import QuestionResult from './QuestionResult';
+import QuestionResult from './QuestionResult'
 
 const QuestionResults = ({answers, questions}) => {
     const numAnswered = answers.reduce((accum, el) => accum += el != null, 0)
@@ -12,4 +12,4 @@ const QuestionResults = ({answers, questions}) => {
     )
 }
 
-export default QuestionResults;
+export default QuestionResults
