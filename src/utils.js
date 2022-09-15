@@ -1,3 +1,4 @@
+// credit: Wladimir Palant - https://stackoverflow.com/a/34064434
 const htmlDecode = input => new DOMParser()
     .parseFromString(input, "text/html")
     .documentElement.textContent
