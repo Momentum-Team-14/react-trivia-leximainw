@@ -7,6 +7,9 @@ const TriviaQuestion = ({question, setCorrect}) => {
         let allAnswers = [...question.incorrect_answers]
         allAnswers.push(question.correct_answer)
         allAnswers = shuffleArray(allAnswers)
+        if (question.type === 'boolean') {
+            allAnswers = allAnswers.sort((a, b) => -a.localeCompare(b))
+        }
         setAnswers(allAnswers)
     }
 
