@@ -17,7 +17,9 @@ const TriviaQuiz = ({category, difficulty, apiToken, resetToggle, onComplete = _
                 })
             setQuizCompleted(false)
         }
-    }, [category, resetToggle, apiToken])
+    }, [category, resetToggle, apiToken])   // eslint-disable-line react-hooks/exhaustive-deps
+    // explicitly disable missing dependency warning for 'difficulty':
+    // not refetching on difficulty change is intended behavior
 
     if (!quizCompleted) {
         if (!questions) {
