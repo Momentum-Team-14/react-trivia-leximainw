@@ -10,6 +10,7 @@ const TriviaQuiz = ({category, apiToken, resetToggle, onComplete = _ => {}}) => 
 
     useEffect(() => {
         if (category) {
+            setQuestions(null)
             axios.get(`https://opentdb.com/api.php?amount=10&category=${category.id}${apiToken && `&token=${apiToken}`}`)
                 .then(res => {
                     setQuestions(res.data.results)
