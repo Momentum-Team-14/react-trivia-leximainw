@@ -14,6 +14,7 @@ const TriviaQuiz = ({category, apiToken, resetToggle, onComplete = _ => {}}) => 
                 .then(res => {
                     setQuestions(res.data.results)
                 })
+            setQuizCompleted(false)
         }
     }, [category, resetToggle, apiToken])
 
