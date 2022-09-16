@@ -34,7 +34,7 @@ const Trivia = () => {
                 <div>
                     <button
                         className='btn btn-secondary'
-                        style={{marginLeft: '3rem'}}
+                        style={{marginBottom: '2rem'}}
                         onClick={resetApiToken}
                     >Reset Token</button>
                 </div>
@@ -47,7 +47,7 @@ const Trivia = () => {
                 <div>
                     <button
                         className='btn btn-secondary'
-                        style={{marginLeft: '3rem'}}
+                        style={{marginBottom: '2rem'}}
                         onClick={resetApiToken}
                     >Reset Token</button>
                     <TriviaQuiz
