@@ -22,7 +22,11 @@ const Trivia = () => {
     />
 
     if (!currCategory) {
-        return categoryList
+        return (
+            <div style={{display: 'flex'}}>
+                {categoryList}
+            </div>
+        )
     } else {
         return (
             <div style={{display: 'flex'}}>
