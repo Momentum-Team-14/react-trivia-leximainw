@@ -4,20 +4,26 @@ import CategoryList from './CategoryList'
 import TriviaQuiz from './TriviaQuiz'
 
 const Trivia = () => {
-    const [currCategory, setCurrCategory] = useState(null)
     const [apiToken, setApiToken] = useState(null)
+    const [currCategory, setCurrCategory] = useState(null)
+    const [currDifficulty, setCurrDifficulty] = useState(null)
     const [resetToggle, setResetToggle] = useState(false)
     const reset = () => setResetToggle(!resetToggle)
+    const [resetApiToggle, setResetApiToggle] = useState(false)
+    const resetApiToken = () => setResetApiToggle(!resetApiToggle)
 
     useEffect(() => {
         axios.get('https://opentdb.com/api_token.php?command=request')
             .then(res => setApiToken(res.data.token))
-    }, [])
+    }, [resetApiToggle])
 
     const categoryList = <CategoryList
-        onSelected={category => {
+        onCategoryChanged={category => {
             setCurrCategory(category)
             reset()
+        }}
+        onDifficultyChanged={difficulty => {
+            setCurrDifficulty(difficulty === 'Any' ? null : difficulty)
         }}
     />
 
@@ -25,17 +31,32 @@ const Trivia = () => {
         return (
             <div style={{display: 'flex'}}>
                 {categoryList}
+                <div>
+                    <button
+                        className='btn btn-secondary'
+                        style={{marginLeft: '3rem'}}
+                        onClick={resetApiToken}
+                    >Reset Token</button>
+                </div>
             </div>
         )
     } else {
         return (
             <div style={{display: 'flex'}}>
                 {categoryList}
-                <TriviaQuiz
-                    category={currCategory}
-                    apiToken={apiToken}
-                    resetToggle={resetToggle}
-                />
+                <div>
+                    <button
+                        className='btn btn-secondary'
+                        style={{marginLeft: '3rem'}}
+                        onClick={resetApiToken}
+                    >Reset Token</button>
+                    <TriviaQuiz
+                        category={currCategory}
+                        difficulty={currDifficulty}
+                        apiToken={apiToken}
+                        resetToggle={resetToggle}
+                    />
+                </div>
             </div>
         )
     }

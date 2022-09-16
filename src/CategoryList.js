@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
+import DifficultyButtons from "./DifficultyButtons"
 
-const CategoryList = ({onSelected}) => {
+const CategoryList = ({onCategoryChanged, onDifficultyChanged}) => {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -12,9 +13,15 @@ const CategoryList = ({onSelected}) => {
             )))
     }, [])
 
+    const difficulty = <DifficultyButtons
+        className='btn'
+        onChanged={difficulty => onDifficultyChanged(difficulty)}
+    />
+
     return (
         <div className='btn-group-vertical btn-group-toggle' style={{flexShrink: 0, marginRight: '2rem'}}>
-            {categories.map(category => (
+            {difficulty}
+            {categories.map((category, index) => (
                 <>
                     <input
                         className='btn-check'
@@ -22,11 +29,12 @@ const CategoryList = ({onSelected}) => {
                         name='options'
                         id={category.name}
                         autoComplete='off'
-                    />
+                        />
                     <label
                         className='btn btn-primary'
                         htmlFor={category.name}
-                        onClick={() => onSelected(category)}
+                        onClick={() => onCategoryChanged(category)}
+                        style={index === 0 ? {borderTopLeftRadius: 0, borderTopRightRadius: 0} : {}}
                     >{category.name}</label>
                 </>
             ))}

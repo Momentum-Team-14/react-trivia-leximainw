@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 import QuestionResults from './QuestionResults'
 import TriviaQuestions from './TriviaQuestions'
 
-const TriviaQuiz = ({category, apiToken, resetToggle, onComplete = _ => {}}) => {
+const TriviaQuiz = ({category, difficulty, apiToken, resetToggle, onComplete = _ => {}}) => {
     const [answers, setAnswers] = useState([])
     const [questions, setQuestions] = useState(null)
     const [quizCompleted, setQuizCompleted] = useState(false)
@@ -11,7 +11,7 @@ const TriviaQuiz = ({category, apiToken, resetToggle, onComplete = _ => {}}) => 
     useEffect(() => {
         if (category) {
             setQuestions(null)
-            axios.get(`https://opentdb.com/api.php?amount=10&category=${category.id}${apiToken && `&token=${apiToken}`}`)
+            axios.get(`https://opentdb.com/api.php?amount=10&category=${category.id}${difficulty ? `&difficulty=${difficulty.toLowerCase()}` : ''}${apiToken ? `&token=${apiToken}` : ''}`)
                 .then(res => {
                     setQuestions(res.data.results)
                 })
