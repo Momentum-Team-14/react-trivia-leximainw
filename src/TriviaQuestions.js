@@ -8,9 +8,9 @@ const TriviaQuestions = ({questions, onComplete}) => {
         <div>{questions.map((elem, index) => (
             <TriviaQuestion
                 question={elem}
-                setCorrect={correct => {
+                setCorrect={answer => {
                     let newAnswered = [...answered]
-                    newAnswered[index] = correct
+                    newAnswered[index] = answer
                     setAnswered(newAnswered)
                 }}
                 key={elem.question}
